@@ -1,17 +1,23 @@
 import express from "express";
 import cors from "cors";
+import dotenv from 'dotenv';
+import cookieParser from "cookie-parser";
 import db from "./database/db.js";
-
+dotenv.config();
 import userRoutes from './routes/routesUser.js'
 import projectRoutes from './routes/routeProject.js'
+import loginRoutes from './routes/routeLogin.js'
+
 
 
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/projects', projectRoutes);
+app.use('/', loginRoutes);
 
 
 try {
@@ -25,6 +31,6 @@ app.get('/', (req, res) => {
     res.send('HOLA MUNDO');
 })
 
-app.listen(3000, () => {
-    console.log('Server conectado en http://localhost:3000/')
+app.listen(8000, () => {
+    console.log('Server conectado en http://localhost:8000/')
 })

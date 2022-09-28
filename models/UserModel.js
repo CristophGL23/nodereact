@@ -5,7 +5,8 @@ const UserModel = db.define('users', {
     name_complete: { type: DataTypes.STRING },
     user_name: { type: DataTypes.INTEGER },
     email: { type: DataTypes.STRING },
-    password: { type: DataTypes.STRING }
+    password: { type: DataTypes.STRING },
+    refresh_token: { type: DataTypes.TEXT }
 });
 
 export default UserModel

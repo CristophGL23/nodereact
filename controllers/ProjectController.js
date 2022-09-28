@@ -1,8 +1,11 @@
 import ProjectModel from "../models/ProjectModel.js";
+import UserModel from "../models/UserModel.js";
 
 export const getAllProjects = async (req, res) => {
     try {
-        const tasks = await ProjectModel.findAll();
+        const tasks = await ProjectModel.findAll({
+            include: UserModel
+        });
         res.json(tasks)
     } catch (error) {
         res.json({message: error.message})

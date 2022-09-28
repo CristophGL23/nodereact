@@ -1,5 +1,5 @@
 import UserModel from "../models/UserModel.js";
-
+import bcript from "bcrypt";
 export const getAllUsers = async (req, res) => {
     try {
         const users = await UserModel.findAll();
@@ -24,7 +24,14 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
-        await UserModel.create(req.body);
+        const salt = await bcript.genSalt(10);
+        let usr = {
+            name_complete: req.body.name_complete,
+            user_name: req.body.user_name,
+            email: req.body.email,
+            password: await bcript.hash(req.body.password, salt)
+        }
+        await UserModel.create(usr);
         res.json({
             message: 'Usuario agregado correctamente!!'
         })
