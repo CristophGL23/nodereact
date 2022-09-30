@@ -7,17 +7,19 @@ dotenv.config();
 import userRoutes from './routes/routesUser.js'
 import projectRoutes from './routes/routeProject.js'
 import loginRoutes from './routes/routeLogin.js'
-
-
+import fileRoutes from './routes/routeFiles.js';
 
 const app = express();
 
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
+
 app.use('/users', userRoutes);
 app.use('/projects', projectRoutes);
-app.use('/', loginRoutes);
+app.use('/auth', loginRoutes);
+app.use('/files', fileRoutes)
+app.use('/uploads', express.static('./uploads'))
 
 
 try {

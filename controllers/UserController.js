@@ -3,6 +3,7 @@ import bcript from "bcrypt";
 export const getAllUsers = async (req, res) => {
     try {
         const users = await UserModel.findAll();
+    
         res.json(users)
     } catch (error) {
         res.json({message: error.message})
@@ -29,7 +30,7 @@ export const createUser = async (req, res) => {
             name_complete: req.body.name_complete,
             user_name: req.body.user_name,
             email: req.body.email,
-            password: await bcript.hash(req.body.password, salt)
+            password: req.body.password
         }
         await UserModel.create(usr);
         res.json({
